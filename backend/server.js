@@ -72,7 +72,7 @@ app.post('/contact', async (req, res) => {
     return res.status(500).json({ error: 'internal_error' });
   }
 });
-
+console.log('PORT env:', process.env.PORT);
 app.listen(PORT, () => {
   console.log(`✅ portfolio-backend listening on http://localhost:${PORT}`);
 });
