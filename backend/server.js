@@ -7,7 +7,13 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const FRONTEND = process.env.FRONTEND_URL || 'http://localhost:3000';
+
+// Liste des origines autorisées (ajoute ici toutes celles que tu utilises)
+const allowedOrigins = [
+  'https://portfolio-fullstack-umber.vercel.app',
+  'https://portfolio-fullstack-m0zlk6hud-joshua-nzuzis-projects.vercel.app',
+  'http://localhost:3000',
+];
 
 if (!process.env.RESEND_API_KEY) {
   console.warn('⚠️ RESEND_API_KEY not set. Email sending will fail.');
@@ -19,7 +25,17 @@ if (!process.env.RECEIVER_EMAIL) {
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.use(express.json({ limit: '10kb' }));
-app.use(cors({ origin: FRONTEND }));
+
+app.use(cors({
+  origin: function(origin, callback){
+    if (!origin) return callback(null, true); // Autoriser les requêtes sans origine (ex: Postman)
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = `The CORS policy for this site does not allow access from the specified Origin: ${origin}`;
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 app.get('/', (req, res) => res.json({ status: 'ok', service: 'portfolio-backend' }));
 
@@ -72,6 +88,7 @@ app.post('/contact', async (req, res) => {
     return res.status(500).json({ error: 'internal_error' });
   }
 });
+
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`✅ portfolio-backend listening on http://0.0.0.0:${PORT}`);
 });
