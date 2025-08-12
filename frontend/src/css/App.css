@@ -230,3 +230,23 @@ body {
 		opacity: 0.5;
 	}
 }
+
+/* ===== Anti-vacillement mobile ===== */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden; /* ou clip si support OK */
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+img, video, svg, canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+pre { white-space: pre-wrap; }
+code, a, p { overflow-wrap: anywhere; word-break: break-word; }
+/* ===== Fin patch ===== */
