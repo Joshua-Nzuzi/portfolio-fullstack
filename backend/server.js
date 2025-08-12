@@ -8,11 +8,12 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Liste des origines autorisées (ajoute ici toutes celles que tu utilises)
+// Liste des origines autorisées
 const allowedOrigins = [
   'https://portfolio-fullstack-umber.vercel.app',
   'https://portfolio-fullstack-git-main-joshua-nzuzis-projects.vercel.app',
   'https://portfolio-fullstack-m0zlk6hud-joshua-nzuzis-projects.vercel.app',
+  'https://portfolio-fullstack-n7ozqx48l-joshua-nzuzis-projects.vercel.app', // <== NOUVEAU DOMAINE AJOUTÉ
   'http://localhost:3000',
 ];
 
@@ -27,16 +28,17 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.use(express.json({ limit: '10kb' }));
 
-app.use(cors({
-  origin: function(origin, callback){
-    if (!origin) return callback(null, true); // Autoriser les requêtes sans origine (ex: Postman)
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = `The CORS policy for this site does not allow access from the specified Origin: ${origin}`;
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  }
-}));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // Autoriser requêtes sans origin
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error(`The CORS policy for this site does not allow access from the specified Origin: ${origin}`), false);
+    },
+  })
+);
 
 app.get('/', (req, res) => res.json({ status: 'ok', service: 'portfolio-backend' }));
 
