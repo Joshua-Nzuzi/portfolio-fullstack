@@ -1,7 +1,6 @@
 /*== 
  * React & TailwindCSS Portfolio Main CSS File
- * Powered by: @realstoman
-*/
+
 
 body {
 	font-family: 'GeneralSans-Variable';
@@ -235,6 +234,7 @@ body {
 @media (max-width: 768px) {
   html, body {
     overflow-x: hidden;
+	width: 100%;
   }
 }
 
