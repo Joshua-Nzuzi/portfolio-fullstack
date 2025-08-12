@@ -231,22 +231,39 @@ body {
 	}
 }
 
-/* ===== Anti-vacillement mobile ===== */
+/* 1. Bloquer l’overflow horizontal partout */
 html, body {
   max-width: 100%;
-  overflow-x: hidden; /* ou clip si support OK */
+  overflow-x: hidden;
+  position: relative; /* utile sur iOS pour limiter certains "shifts" */
+  -webkit-text-size-adjust: 100%; /* évite les zooms automatiques */
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
+/* 2. Gestion du 100vh sur mobile (barre d'adresse dynamique) */
+:root {
+  --vh: 100%;
 }
 
-img, video, svg, canvas {
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari */
+  :root {
+    --vh: calc(var(--vh, 1vh) * 1);
+  }
+}
+
+/* Exemple d’utilisation : remplace height: 100vh; par… */
+.section-fullheight {
+  height: calc(var(--vh, 1vh) * 100);
+}
+
+/* 3. Images et éléments media responsives */
+img, video, canvas {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-pre { white-space: pre-wrap; }
-code, a, p { overflow-wrap: anywhere; word-break: break-word; }
-/* ===== Fin patch ===== */
+/* 4. Eviter les marges/paddings qui cassent la mise en page */
+* {
+  box-sizing: border-box;
+}
