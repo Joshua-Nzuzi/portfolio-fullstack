@@ -1,7 +1,6 @@
 /*== 
  * React & TailwindCSS Portfolio Main CSS File
 
-
 body {
 	font-family: 'GeneralSans-Variable';
 }
@@ -231,4 +230,3 @@ body {
 		opacity: 0.5;
 	}
 }
-
