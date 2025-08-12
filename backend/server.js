@@ -19,15 +19,30 @@ const allowedOrigins = [
 // Middleware CORS global
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin) return callback(null, true); // permet Postman ou requêtes serveur
+    // Autoriser requêtes sans origin (Postman, server-to-server)
+    if (!origin) return callback(null, true);
+
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
+    } else {
+      console.warn(`❌ Origin refusée: ${origin}`);
+      return callback(null, false); // pas d'erreur fatale
     }
-    return callback(new Error(`CORS: Origin non autorisé → ${origin}`), false);
   },
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Fallback manuel si jamais cors() ne gère pas OPTIONS
+app.options('*', (req, res) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  }
+  res.sendStatus(204);
+});
 
 // Gestion spécifique du pré‑vol (important pour fetch POST JSON)
 app.options('*', cors());
