@@ -16,52 +16,44 @@ const allowedOrigins = [
   'http://localhost:3000',
 ];
 
-// Middleware CORS global
+// 1️⃣ CORS configuré sans throw d’erreur
 app.use(cors({
-  origin: function (origin, callback) {
-    // Autoriser requêtes sans origin (Postman, server-to-server)
-    if (!origin) return callback(null, true);
-
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true); // requêtes sans Origin (Postman, SSR…)
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
-    } else {
-      console.warn(`❌ Origin refusée: ${origin}`);
-      return callback(null, false); // pas d'erreur fatale
     }
+    console.warn(`❌ Origin refusée: ${origin}`);
+    return callback(null, false); // pas d'exception -> évite 500
   },
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Fallback manuel si jamais cors() ne gère pas OPTIONS
+// 2️⃣ Fallback manuel pour toutes les requêtes OPTIONS
 app.options('*', (req, res) => {
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
   }
-  res.sendStatus(204);
+  res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  return res.sendStatus(204);
 });
-
-// Gestion spécifique du pré‑vol (important pour fetch POST JSON)
-app.options('*', cors());
 
 app.use(express.json({ limit: '10kb' }));
 
-// === Email service ===
 if (!process.env.RESEND_API_KEY) {
   console.warn('⚠️ RESEND_API_KEY not set. Email sending will fail.');
 }
 if (!process.env.RECEIVER_EMAIL) {
   console.warn('⚠️ RECEIVER_EMAIL not set.');
 }
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Route test
 app.get('/', (req, res) => res.json({ status: 'ok', service: 'portfolio-backend' }));
 
-// Sécurité basique HTML
 function escapeHtml(unsafe) {
   return String(unsafe)
     .replaceAll('&', '&amp;')
@@ -71,11 +63,11 @@ function escapeHtml(unsafe) {
     .replaceAll("'", '&#039;');
 }
 
-// Route contact
 app.post('/contact', async (req, res) => {
   try {
     console.log('Reçu backend:', req.body);
     const { name, email, subject, message } = req.body || {};
+
     if (!name || !email || !message) {
       return res.status(400).json({ error: 'name, email and message are required' });
     }
