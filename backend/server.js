@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 5000;
 // Liste des origines autorisées (ajoute ici toutes celles que tu utilises)
 const allowedOrigins = [
   'https://portfolio-fullstack-umber.vercel.app',
+  'https://portfolio-fullstack-git-main-joshua-nzuzis-projects.vercel.app/',
   'https://portfolio-fullstack-m0zlk6hud-joshua-nzuzis-projects.vercel.app',
   'http://localhost:3000',
 ];
