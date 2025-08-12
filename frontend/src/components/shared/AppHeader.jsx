@@ -35,11 +35,12 @@ const AppHeader = () => {
 
 	return (
 		<motion.nav
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			id="nav"
-			className="sm:container sm:mx-auto"
-		>
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  id="nav"
+  className="fixed top-0 left-0 w-full z-50 bg-primary-light dark:bg-ternary-dark sm:container sm:mx-auto shadow-md"
+>
+
 			<div className="z-10 max-w-screen-lg xl:max-w-screen-xl block sm:flex sm:justify-between sm:items-center py-6">
 				{/* Header menu links and small screen hamburger menu */}
 				<div className="flex justify-between items-center px-4 sm:px-0">
