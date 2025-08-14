@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import useThemeSwitcher from '../../hooks/useThemeSwitcher';
@@ -9,6 +10,7 @@ import Button from '../reusable/Button';
 const AppHeader = () => {
 	const [showMenu, setShowMenu] = useState(false);
 	const [showModal, setShowModal] = useState(false);
+	
 	const [activeTheme, setTheme] = useThemeSwitcher();
 
 	function toggleMenu() {
@@ -34,7 +36,9 @@ const AppHeader = () => {
 	}
 
 	return (
-		<motion.nav
+		<header className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-primary-dark"
+>
+			<motion.nav
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			id="nav"
@@ -45,12 +49,12 @@ const AppHeader = () => {
 				<div className="flex justify-between items-center px-4 sm:px-0">
 					<div>
 					<Link
-  to="/"
+to="/"
   className={`text-3xl font-bold tracking-wide transition-colors duration-300 ${
     activeTheme === 'dark' ? 'text-indigo-600' : 'text-white'
   }`}
 >
-  Joshua Mavinga
+  Joshua
 </Link>
 
 
@@ -199,6 +203,7 @@ const AppHeader = () => {
 				{showModal ? showHireMeModal : null}
 			</div>
 		</motion.nav>
+		</header>
 	);
 };
 

@@ -8,12 +8,13 @@ const AppBanner = () => {
   const [activeTheme] = useThemeSwitcher();
 
   return (
+	
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ ease: 'easeInOut', duration: 0.9, delay: 0.2 }}
       className="flex flex-col sm:flex-row items-center justify-between gap-10 px-4 sm:px-8 py-12 overflow-x-hidden"
-    >
+>
       <div className="w-full sm:w-1/2 text-left">
         <motion.h1
           initial={{ opacity: 0 }}

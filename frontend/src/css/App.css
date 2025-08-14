@@ -238,6 +238,11 @@ html, body {
   position: relative; /* utile sur iOS pour limiter certains "shifts" */
   -webkit-text-size-adjust: 100%; /* évite les zooms automatiques */
 }
+/* styles.css */
+.main-content {
+  padding-top: 96px; /* ou utilise une variable CSS si tu veux */
+}
+
 
 /* 2. Gestion du 100vh sur mobile (barre d'adresse dynamique) */
 :root {
