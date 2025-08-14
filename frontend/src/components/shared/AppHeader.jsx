@@ -36,8 +36,8 @@ const AppHeader = () => {
 	}
 
 	return (
-		<header className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-primary-dark"
->
+		<header className="fixed top-0 left-0 w-full z-50 bg-primary-light dark:bg-primary-dark">
+
 			<motion.nav
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
@@ -97,7 +97,6 @@ to="/"
 					</div>
 				</div>
 
-				{/* Header links small screen */}
 				<div
 					className={
 						showMenu
