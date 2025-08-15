@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+
 
 import { FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
@@ -9,7 +10,41 @@ import Button from '../reusable/Button';
 
 const AppHeader = () => {
 	const [showMenu, setShowMenu] = useState(false);
+	// Référence pour détecter les clics à l'extérieur
+const menuRef = useRef(null);
+
+useEffect(() => {
+  function handleClickOutside(event) {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setShowMenu(false);
+    }
+  }
+  if (showMenu) {
+    document.addEventListener('mousedown', handleClickOutside);
+  } else {
+    document.removeEventListener('mousedown', handleClickOutside);
+  }
+  return () => document.removeEventListener('mousedown', handleClickOutside);
+}, [showMenu]);
+
 	const [showModal, setShowModal] = useState(false);
+	const modalRef = useRef(null);
+
+useEffect(() => {
+  function handleClickOutside(event) {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      setShowModal(false);
+      document.getElementsByTagName('html')[0].classList.remove('overflow-y-hidden');
+    }
+  }
+  if (showModal) {
+    document.addEventListener('mousedown', handleClickOutside);
+  } else {
+    document.removeEventListener('mousedown', handleClickOutside);
+  }
+  return () => document.removeEventListener('mousedown', handleClickOutside);
+}, [showModal]);
+
 	
 	const [activeTheme, setTheme] = useThemeSwitcher();
 
@@ -37,6 +72,7 @@ const AppHeader = () => {
 
 	return (
 		<header className="fixed top-0 left-0 w-full z-50 bg-primary-light dark:bg-primary-dark">
+
 
 			<motion.nav
 			initial={{ opacity: 0 }}
@@ -98,7 +134,9 @@ to="/"
 				</div>
 
 				<div
+				ref={menuRef}
 					className={
+					
 						showMenu
 							? 'block m-0 sm:ml-4 mt-5 sm:mt-3 sm:flex p-5 sm:p-0 justify-center items-center shadow-lg sm:shadow-none'
 							: 'hidden'
@@ -191,16 +229,15 @@ to="/"
 					</div>
 				</div>
 			</div>
-			{/* Hire me modal */}
 			<div>
-				{showModal ? (
-					<HireMeModal
-						onClose={showHireMeModal}
-						onRequest={showHireMeModal}
-					/>
-				) : null}
-				{showModal ? showHireMeModal : null}
-			</div>
+  {showModal && (
+    <HireMeModal
+      ref={modalRef} // uniquement si HireMeModal est forwardRef
+      onClose={showHireMeModal}
+      onRequest={showHireMeModal}
+    />
+  )}
+</div>
 		</motion.nav>
 		</header>
 	);

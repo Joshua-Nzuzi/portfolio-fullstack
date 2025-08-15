@@ -8,8 +8,13 @@ const AboutMeBio = () => {
 	return (
 		<div className="block sm:flex sm:gap-10 mt-10 sm:mt-20">
 			<div className="w-full sm:w-1/4 mb-7 sm:mb-0">
-				<img src={profileImage} className="rounded-lg w-96" alt="" />
-			</div>
+  <img 
+    src={profileImage} 
+    className="rounded-lg w-48 sm:w-86 mx-auto sm:mx-0" 
+    alt="profileImage" 
+  />
+</div>
+
 
 			<div className="font-general-regular w-full sm:w-3/4 text-left">
 				{aboutMe.map((bio) => (
