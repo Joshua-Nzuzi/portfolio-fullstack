@@ -112,25 +112,20 @@ to="/"
 
 					{/* Small screen hamburger menu */}
 					<div className="sm:hidden">
-						<button
-							onClick={toggleMenu}
-							type="button"
-							className="focus:outline-none"
-							aria-label="Hamburger Menu"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 24 24"
-								className="h-7 w-7 fill-current text-secondary-dark dark:text-ternary-light"
-							>
-								{showMenu ? (
-									<FiX className="text-3xl" />
-								) : (
-									<FiMenu className="text-3xl" />
-								)}
-							</svg>
-						</button>
-					</div>
+  <button
+    onClick={() => setShowMenu((v) => !v)} // toggle menu
+    type="button"
+    className="focus:outline-none"
+    aria-label="Hamburger Menu"
+  >
+    {showMenu ? (
+      <FiX className="h-7 w-7 text-secondary-dark dark:text-ternary-light" />
+    ) : (
+      <FiMenu className="h-7 w-7 text-secondary-dark dark:text-ternary-light" />
+    )}
+  </button>
+</div>
+
 				</div>
 
 				<div
