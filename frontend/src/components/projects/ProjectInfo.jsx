@@ -22,7 +22,7 @@ const ProjectInfo = () => {
 									>
 										<span>{info.title}: </span>
 										<a
-											href="https://joshua-tweter-882a65fq9-joshua-nzuzis-projects.vercel.app/profile"
+											href="https://joshua-twitter-ui-git-master-joshua-nzuzis-projects.vercel.app?_vercel_share=aJXtNvLFPFUf06zeYTIsezoV6xtNlE5Y"
 											className={
 												info.title === 'Website' ||
 												info.title === 'Phone'
