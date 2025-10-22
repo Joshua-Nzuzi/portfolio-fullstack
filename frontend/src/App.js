@@ -20,27 +20,27 @@ function App() {
     const location = useLocation();
 
     return (
-        <ProjectsProvider> {/* ✅ tout est enveloppé ici */}
-            <AnimatePresence mode="wait">
-                <div key={location.pathname}>
-                    <ScrollToTop />
-                    <Layout>
-                        <Suspense fallback={""}>
-                            <Routes location={location} key={location.pathname}>
-                                <Route path="/" element={<Home />} />
-                                <Route path="/projects" element={<Projects />} />
-                                <Route path="/projects/single-project" element={<ProjectSingle />} />
-                                <Route path="/projects/:slug" element={<ProjectInfo />} />
-                                <Route path="/about" element={<About />} />
-                                <Route path="/contact" element={<Contact />} />
-                            </Routes>
-                        </Suspense>
-                        <ToastContainer position="top-center" />
-                    </Layout>
-                    <UseScrollToTop />
-                </div>
-            </AnimatePresence>
-        </ProjectsProvider>
+        <ProjectsProvider>
+  <AnimatePresence mode="wait">
+    <div key={location.pathname}>
+      <ScrollToTop />
+      <ToastContainer position="top-center" autoClose={5000} />
+      <Layout>
+        <Suspense fallback={""}>
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/single-project" element={<ProjectSingle />} />
+            <Route path="/projects/:slug" element={<ProjectInfo />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </Suspense>
+      </Layout>
+      <UseScrollToTop />
+    </div>
+  </AnimatePresence>
+</ProjectsProvider>
     );
 }
 

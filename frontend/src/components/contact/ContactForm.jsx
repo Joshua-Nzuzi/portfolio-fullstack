@@ -10,23 +10,49 @@ const ContactForm = () => {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  // Validation helpers
+  const isValidEmail = (email) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+
+  const isValidName = (name) =>
+    /^[a-zA-ZÀ-ÿ\s'-]{2,}$/.test(name.trim());
+
+  const sanitize = (str) => str.replace(/<[^>]*>?/gm, '').trim();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
     if (!name || !email || !message) {
-      toast.error("Merci de remplir les champs nom, email et message.");
+      toast.error("Merci de remplir tous les champs.");
       setIsLoading(false);
       return;
     }
 
-    try {
-      const API_URL = process.env.REACT_APP_API_URL;
+    if (!isValidName(name)) {
+      toast.error("Nom invalide. Utilise uniquement des lettres.");
+      setIsLoading(false);
+      return;
+    }
 
-const response = await fetch(`${API_URL}/contact`, {
+    if (!isValidEmail(email)) {
+      toast.error("Adresse email invalide.");
+      setIsLoading(false);
+      return;
+    }
+
+    const API_URL = process.env.REACT_APP_API_URL;
+    const payload = {
+      name: sanitize(name),
+      email: sanitize(email),
+      message: sanitize(message),
+    };
+
+    try {
+      const response = await fetch(`${API_URL}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
@@ -102,7 +128,7 @@ const response = await fetch(`${API_URL}/contact`, {
 
           <div className="font-general-medium w-40 px-4 py-2.5 text-white text-center font-medium tracking-wider bg-indigo-500 hover:bg-indigo-600 focus:ring-1 focus:ring-indigo-900 rounded-lg mt-6 duration-500">
             <Button
-              title={isLoading ? "Envoi..." : "Send Message"}
+              title={isLoading ? "⏳ Envoi..." : "Send Message"}
               type="submit"
               aria-label="Send Message"
               disabled={isLoading}
@@ -114,5 +140,12 @@ const response = await fetch(`${API_URL}/contact`, {
     </div>
   );
 };
+<button
+  onClick={() => toast.success("✅ Test toast OK")}
+  className="bg-green-600 text-white px-4 py-2 mt-4 rounded"
+>
+  Tester les toasts
+</button>
+
 
 export default ContactForm;
