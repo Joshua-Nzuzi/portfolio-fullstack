@@ -1,12 +1,14 @@
 import { AnimatePresence } from 'framer-motion';
 import { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
 import Layout from './components/shared/Layout';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/App.css';
 import UseScrollToTop from './hooks/useScrollToTop';
+import ProjectInfo from './components/projects/ProjectInfo';
+import { ProjectsProvider } from './context/ProjectsContext'; // ✅ ajouté ici
 
 const About = lazy(() => import('./pages/AboutMe'));
 const Contact = lazy(() => import('./pages/Contact.jsx'));
@@ -15,26 +17,31 @@ const Projects = lazy(() => import('./pages/Projects'));
 const ProjectSingle = lazy(() => import('./pages/ProjectSingle.jsx'));
 
 function App() {
-  return (
-    <AnimatePresence>
-      <Router>
-        <ScrollToTop />
-        <Layout>
-          <Suspense fallback={""}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="projects" element={<Projects />} />
-              <Route path="projects/single-project" element={<ProjectSingle />} />
-              <Route path="about" element={<About />} />
-              <Route path="contact" element={<Contact />} />
-            </Routes>
-          </Suspense>
-          <ToastContainer position="top-center" />
-        </Layout>
-        <UseScrollToTop />
-      </Router>
-    </AnimatePresence>
-  );
+    const location = useLocation();
+
+    return (
+        <ProjectsProvider> {/* ✅ tout est enveloppé ici */}
+            <AnimatePresence mode="wait">
+                <div key={location.pathname}>
+                    <ScrollToTop />
+                    <Layout>
+                        <Suspense fallback={""}>
+                            <Routes location={location} key={location.pathname}>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/projects" element={<Projects />} />
+                                <Route path="/projects/single-project" element={<ProjectSingle />} />
+                                <Route path="/projects/:slug" element={<ProjectInfo />} />
+                                <Route path="/about" element={<About />} />
+                                <Route path="/contact" element={<Contact />} />
+                            </Routes>
+                        </Suspense>
+                        <ToastContainer position="top-center" />
+                    </Layout>
+                    <UseScrollToTop />
+                </div>
+            </AnimatePresence>
+        </ProjectsProvider>
+    );
 }
 
 export default App;

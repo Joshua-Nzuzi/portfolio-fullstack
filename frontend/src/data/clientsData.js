@@ -8,7 +8,7 @@ import EnabelImage from '../images/brands/Enabel.png';
 import UnicefImage from '../images/brands/Unicef.png';
 import AdnImage from '../images/brands/Adn.png';
 
-export const clientsHeading = 'Some of the brands that trust me';
+export const clientsHeading = 'Some of the brands that trust us';
 
 export const clientsData = [
 	{

@@ -7,11 +7,8 @@ import Image5 from '../images/web-project-1.jpg';
 import Image6 from '../images/ui-project-2.jpg';
 // Import icons
 import {
-	FiFacebook,
-	FiInstagram,
 	FiLinkedin,
 	FiTwitter,
-	FiYoutube,
 	FiGithub,
 } from 'react-icons/fi';
 
