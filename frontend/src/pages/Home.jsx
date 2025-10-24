@@ -24,7 +24,7 @@ const Home = () => {
 				</Link>
 			</div>
 
-			<ScrollButton /> {/* ✅ 2. ajout ici */}
+			<ScrollButton />
 		</div>
 	);
 };

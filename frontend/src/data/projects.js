@@ -53,7 +53,7 @@ export const projectsData = [
             CompanyInfo: [
                 { id: 1, title: 'Name', details: 'Alikin Marketplace' },
                 { id: 2, title: 'Services', details: 'E-commerce SaaS Platform' },
-                { id: 3, title: 'Website', details: 'https://alikin-marketplace.com' },
+                { id: 3, title: 'Website', details: 'https://alikin-marketplace-fullstack.vercel.app/' },
             ],
             ObjectivesHeading: 'Project Objective',
             ObjectivesDetails:
@@ -83,7 +83,7 @@ export const projectsData = [
                 { id: 1, title: 'Landing Page', img: AlikinImage1 },
                 { id: 2, title: 'Checkout Flow', img: AlikinImage2 },
             ],
-            LiveSiteLink: 'https://alikin-marketplace.com',
+            LiveSiteLink: 'https://alikin-marketplace-fullstack.vercel.app/',
         },
     },
     {
