@@ -17,7 +17,7 @@ export const projectsData = [
             CompanyInfo: [
                 { id: 1, title: 'Name', details: 'Twitter Clone Inc.' },
                 { id: 2, title: 'Services', details: 'UI Design & Frontend Development' },
-                { id: 3, title: 'Website', details: 'https://joshua-tweter-882a65fq9-joshua-nzuzis-projects.vercel.app/' },
+                { id: 3, title: 'Website', details: 'https://joshua-twitter-ui-git-master-joshua-nzuzis-projects.vercel.app/' },
             ],
             ObjectivesHeading: 'Objective',
             ObjectivesDetails:
@@ -39,7 +39,7 @@ export const projectsData = [
                 { id: 1, title: 'Login & Feed', img: WebImage2 },
                 { id: 2, title: 'Tweet Layout', img: WebImage2b },
             ],
-            LiveSiteLink: 'https://joshua-tweter-882a65fq9-joshua-nzuzis-projects.vercel.app/',
+            LiveSiteLink: 'https://joshua-twitter-ui-git-master-joshua-nzuzis-projects.vercel.app/',
         },
     },
     {
