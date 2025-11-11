@@ -97,7 +97,7 @@ export const projectsData = [
     CompanyInfo: [
       { id: 1, title: 'Name', details: 'Mak Energy' },
       { id: 2, title: 'Services', details: 'Électricité, froid, climatisation, énergie solaire' },
-      { id: 3, title: 'Website', details: 'https://comforting-genie-a4dbdb.netlify.app/' },
+      { id: 3, title: 'Website', details: 'https://mak-energy.com/' },
     ],
     ObjectivesHeading: 'Project Objective',
     ObjectivesDetails:
@@ -118,7 +118,7 @@ export const projectsData = [
     ProjectImages: [
       { id: 1, title: 'Hero Section', img: MakEnergyImage },
     ],
-    LiveSiteLink: 'https://comforting-genie-a4dbdb.netlify.app/',
+    LiveSiteLink: 'https://mak-energy.com/',
   },
 },
 ];
