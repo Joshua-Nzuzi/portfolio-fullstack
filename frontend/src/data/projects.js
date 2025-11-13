@@ -96,12 +96,12 @@ export const projectsData = [
     ClientHeading: 'Client Overview',
     CompanyInfo: [
       { id: 1, title: 'Name', details: 'Mak Energy' },
-      { id: 2, title: 'Services', details: 'Électricité, froid, climatisation, énergie solaire' },
+      { id: 2, title: 'Services', details: 'Electricity, refrigeration, air conditioning, solar energy' },
       { id: 3, title: 'Website', details: 'https://www.mak-energy.com/' },
     ],
     ObjectivesHeading: 'Project Objective',
     ObjectivesDetails:
-      'Créer une vitrine professionnelle pour Mak Energy, mettant en valeur ses services en électricité, climatisation, froid industriel et énergie solaire, avec un design clair, responsive et orienté client.',
+      'Create a professional online storefront for Mak Energy, showcasing its services in electricity, air conditioning, industrial refrigeration, and solar energy, with a clear, responsive, and customer-centric design..',
     Technologies: [
       {
         title: 'Technology Stack',
@@ -110,10 +110,10 @@ export const projectsData = [
     ],
     ProjectDetailsHeading: 'Development Highlights',
     ProjectDetails: [
-      { id: 1, details: 'Design épuré et responsive adapté aux besoins d’un prestataire énergétique.' },
-      { id: 2, details: 'Mise en avant des services clés avec une navigation fluide.' },
-      { id: 3, details: 'Optimisation pour Netlify avec déploiement rapide et sécurisé.' },
-      { id: 4, details: 'Structure modulaire pour faciliter les futures évolutions.' },
+      { id: 1, details: 'Clean and responsive design tailored to the needs of an energy provider.' },
+      { id: 2, details: 'Highlighting key services with seamless navigation.' },
+      { id: 3, details: 'Optimized for Netlify with fast and secure deployment.' },
+      { id: 4, details: 'Modular structure to facilitate future developments.' },
     ],
     ProjectImages: [
       { id: 1, title: 'Hero Section', img: MakEnergyImage },
